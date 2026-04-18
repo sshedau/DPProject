@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>MovieBookingFacade.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #c792ea; font-style: italic;}
+.s1 { color: #c3cee3;}
+.s2 { color: #89ddff;}
+.s3 { color: #546e7a; font-style: italic;}
+.s4 { color: #c3e88d;}
+.s5 { color: #f78c6c;}
+</style>
+</head>
+<body bgcolor="#263238">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MovieBookingFacade.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">FacadeDP</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">AdapterDP</span><span class="s2">.*;</span>
+
+<span class="s0">public class </span><span class="s1">MovieBookingFacade </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">PaymentService paymentService</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">SeatReservationService seatReservationService</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">NotificationService notificationService</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">LoyaltyPointsService loyaltyPointsService</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">TicketService ticketService</span><span class="s2">;</span>
+
+    <span class="s3">// Constructor (choose payment gateway here)</span>
+    <span class="s0">public </span><span class="s1">MovieBookingFacade</span><span class="s2">(</span><span class="s1">PaymentGateway gateway</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">paymentService </span><span class="s2">= </span><span class="s0">new </span><span class="s1">PaymentService</span><span class="s2">(</span><span class="s1">gateway</span><span class="s2">);</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">seatReservationService </span><span class="s2">= </span><span class="s0">new </span><span class="s1">SeatReservationService</span><span class="s2">();</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">notificationService </span><span class="s2">= </span><span class="s0">new </span><span class="s1">NotificationService</span><span class="s2">();</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">loyaltyPointsService </span><span class="s2">= </span><span class="s0">new </span><span class="s1">LoyaltyPointsService</span><span class="s2">();</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">ticketService </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TicketService</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">bookMovieTicket</span><span class="s2">(</span><span class="s1">String accountId</span><span class="s2">, </span><span class="s1">String movieId</span><span class="s2">, </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">seats</span><span class="s2">, </span><span class="s1">String userEmail</span><span class="s2">, </span><span class="s0">double </span><span class="s1">amount</span><span class="s2">) {</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;</span><span class="s2">\n</span><span class="s4">========== MOVIE BOOKING STARTED ==========&quot;</span><span class="s2">);</span>
+
+        <span class="s1">Booking booking </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Booking</span><span class="s2">(</span><span class="s1">accountId</span><span class="s2">, </span><span class="s1">movieId</span><span class="s2">, </span><span class="s1">seats</span><span class="s2">);</span>
+
+        <span class="s3">// Step 1: Payment (Adapter used internally)</span>
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">paymentService</span><span class="s2">.</span><span class="s1">makePayment</span><span class="s2">(</span><span class="s1">accountId</span><span class="s2">, </span><span class="s1">booking</span><span class="s2">.</span><span class="s1">bookingId</span><span class="s2">, </span><span class="s1">amount</span><span class="s2">)) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;❌ FacadeDP.Booking Failed: Payment Error&quot;</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s3">// Step 2: Seat Reservation</span>
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">seatReservationService</span><span class="s2">.</span><span class="s1">reserveSeats</span><span class="s2">(</span><span class="s1">movieId</span><span class="s2">, </span><span class="s1">seats</span><span class="s2">)) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;❌ FacadeDP.Booking Failed: Seat Issue&quot;</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s3">// Step 3: Ticket Generation</span>
+        <span class="s1">ticketService</span><span class="s2">.</span><span class="s1">generateTicket</span><span class="s2">(</span><span class="s1">movieId</span><span class="s2">, </span><span class="s1">seats</span><span class="s2">, </span><span class="s1">booking</span><span class="s2">.</span><span class="s1">bookingId</span><span class="s2">);</span>
+
+        <span class="s3">// Step 4: Loyalty Points</span>
+        <span class="s1">loyaltyPointsService</span><span class="s2">.</span><span class="s1">addPoints</span><span class="s2">(</span><span class="s1">accountId</span><span class="s2">, </span><span class="s5">50</span><span class="s2">);</span>
+
+        <span class="s3">// Step 5: Notification</span>
+        <span class="s1">notificationService</span><span class="s2">.</span><span class="s1">sendBookingConfirmation</span><span class="s2">(</span><span class="s1">userEmail</span><span class="s2">, </span><span class="s1">booking</span><span class="s2">.</span><span class="s1">bookingId</span><span class="s2">);</span>
+
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;🎉 Movie ticket booking completed successfully!&quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;===========================================&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

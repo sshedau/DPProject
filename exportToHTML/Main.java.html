@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Main.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #c792ea; font-style: italic;}
+.s1 { color: #c3cee3;}
+.s2 { color: #89ddff;}
+.s3 { color: #546e7a; font-style: italic;}
+.s4 { color: #c3e88d;}
+.s5 { color: #f78c6c;}
+</style>
+</head>
+<body bgcolor="#263238">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Main.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">AdapterDP</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">FacadeDP</span><span class="s2">.*;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Arrays</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+
+<span class="s3">//TIP To &lt;b&gt;Run&lt;/b&gt; code, press &lt;shortcut actionId=&quot;Run&quot;/&gt; or</span>
+<span class="s3">// click the &lt;icon src=&quot;AllIcons.Actions.Execute&quot;/&gt; icon in the gutter.</span>
+<span class="s0">public class </span><span class="s1">Main </span><span class="s2">{</span>
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s3">//TIP Press &lt;shortcut actionId=&quot;ShowIntentionActions&quot;/&gt; with your caret at the highlighted text</span>
+        <span class="s3">// to see how IntelliJ IDEA suggests fixing it.</span>
+        <span class="s3">// 🔥 Choose Payment Gateway (Adapter Pattern)</span>
+        <span class="s1">PaymentGateway gateway </span><span class="s2">= </span><span class="s0">new </span><span class="s1">RazorpayAdapter</span><span class="s2">();</span>
+        <span class="s3">// AdapterDP.PaymentGateway gateway = new AdapterDP.PayUGateway(); // switch easily</span>
+
+        <span class="s3">// Facade Usage</span>
+        <span class="s1">MovieBookingFacade facade </span><span class="s2">= </span><span class="s0">new </span><span class="s1">MovieBookingFacade</span><span class="s2">(</span><span class="s1">gateway</span><span class="s2">);</span>
+
+        <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">seats </span><span class="s2">= </span><span class="s1">Arrays</span><span class="s2">.</span><span class="s1">asList</span><span class="s2">(</span><span class="s4">&quot;A1&quot;</span><span class="s2">, </span><span class="s4">&quot;A2&quot;</span><span class="s2">, </span><span class="s4">&quot;A3&quot;</span><span class="s2">);</span>
+
+        <span class="s1">facade</span><span class="s2">.</span><span class="s1">bookMovieTicket</span><span class="s2">(</span>
+                <span class="s4">&quot;user123&quot;</span><span class="s2">,</span>
+                <span class="s4">&quot;movie456&quot;</span><span class="s2">,</span>
+                <span class="s1">seats</span><span class="s2">,</span>
+                <span class="s4">&quot;user@example.com&quot;</span><span class="s2">,</span>
+                <span class="s5">750</span>
+        <span class="s2">);</span>
+
+        <span class="s3">// Without Facade</span>
+<span class="s3">//        WithoutFacadeDemo.run();</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>SeatReservationService.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #c792ea; font-style: italic;}
+.s1 { color: #c3cee3;}
+.s2 { color: #89ddff;}
+.s3 { color: #c3e88d;}
+</style>
+</head>
+<body bgcolor="#263238">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SeatReservationService.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">FacadeDP</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">HashSet</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Set</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">AdapterDP</span><span class="s2">.*;</span>
+
+<span class="s0">public class </span><span class="s1">SeatReservationService </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">Set</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">bookedSeats </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HashSet</span><span class="s2">&lt;&gt;();</span>
+
+    <span class="s0">public boolean </span><span class="s1">reserveSeats</span><span class="s2">(</span><span class="s1">String movieId</span><span class="s2">, </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">seats</span><span class="s2">) {</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Step 2: Reserving Seats...&quot;</span><span class="s2">);</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">String seat </span><span class="s2">: </span><span class="s1">seats</span><span class="s2">) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">bookedSeats</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s1">seat</span><span class="s2">)) {</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;❌ Seat &quot; </span><span class="s2">+ </span><span class="s1">seat </span><span class="s2">+ </span><span class="s3">&quot; is already booked!&quot;</span><span class="s2">);</span>
+                <span class="s0">return false</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">String seat </span><span class="s2">: </span><span class="s1">seats</span><span class="s2">) {</span>
+            <span class="s1">bookedSeats</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">seat</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;✔ Seat &quot; </span><span class="s2">+ </span><span class="s1">seat </span><span class="s2">+ </span><span class="s3">&quot; reserved for movie &quot; </span><span class="s2">+ </span><span class="s1">movieId</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s0">return true</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
