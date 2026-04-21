@@ -183,10 +183,10 @@ Step 5: Sending Notification...
 
 ## 👨‍💻 Authors
 
-* **Rajat Parihar**
-* **Sujal Hedau**
-* **Tushar Dhakate**
-* **Varun Singh**
+* **Rajat Parihar : C_17**
+* **Sujal Hedau : C_47**
+* **Tushar Dhakate : C_54**
+* **Varun Singh : C_59**
 
 
 ---
